@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ECOBLOCK – Reference Papers Explained</title>
+<meta name="description" content="Plain-language explanation of the two research papers behind the ECOBLOCK project: recycled plastic bottles in concrete blocks and in construction.">
+<style>
+  :root {
+    --green-900: #1f4a2a;
+    --green-700: #2f6a3b;
+    --green-100: #e6efe7;
+    --sand: #f3f5f2;
+    --ink: #1c2420;
+    --muted: #55645a;
+    --line: #cfd9d1;
+    --plastic: #5aa7c9;
+    --concrete: #b9bcb6;
+    --bg: #ffffff;
+    --serif: Georgia, "Times New Roman", serif;
+    --sans: system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; scroll-padding-top: 4.5rem; }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--sans);
+    font-size: 1.0625rem;
+    line-height: 1.65;
+  }
+  a { color: var(--green-700); text-underline-offset: 3px; }
+  a:focus-visible, button:focus-visible { outline: 3px solid var(--plastic); outline-offset: 2px; border-radius: 2px; }
+
+  .wrap { max-width: 62rem; margin: 0 auto; padding: 0 1.5rem; }
+
+  /* Top bar */
+  .topbar {
+    position: sticky; top: 0; z-index: 10;
+    background: rgba(255,255,255,.96);
+    border-bottom: 1px solid var(--line);
+  }
+  .topbar .wrap { display: flex; align-items: center; justify-content: space-between; gap: 1rem; min-height: 3.5rem; flex-wrap: wrap; }
+  .brand { font-family: var(--serif); font-weight: 700; color: var(--green-900); font-size: 1.15rem; }
+  .topbar nav { display: flex; gap: 1.25rem; font-size: .95rem; flex-wrap: wrap; }
+  .topbar nav a { color: var(--ink); text-decoration: none; padding: .25rem 0; border-bottom: 2px solid transparent; }
+  .topbar nav a:hover { border-bottom-color: var(--green-700); }
+
+  /* Hero */
+  .hero { background: var(--green-900); color: #fff; padding: 4.5rem 0 4rem; }
+  .hero h1 {
+    font-family: var(--serif);
+    font-size: clamp(2.1rem, 5.5vw, 3.6rem);
+    line-height: 1.1;
+    margin: 0 0 1.25rem;
+    max-width: 18ch;
+    font-weight: 700;
+  }
+  .hero p { max-width: 40rem; margin: 0 0 .75rem; color: #dbe8dd; font-size: 1.15rem; }
+  .hero .team { margin-top: 1.75rem; font-size: .95rem; color: #b5ccb9; }
+
+  /* Sections */
+  section { padding: 3.5rem 0; }
+  section + section { border-top: 1px solid var(--line); }
+  h2 { font-family: var(--serif); font-size: clamp(1.6rem, 3.6vw, 2.2rem); line-height: 1.2; color: var(--green-900); margin: 0 0 .5rem; }
+  h3 { font-family: var(--serif); font-size: 1.3rem; color: var(--green-900); margin: 2rem 0 .5rem; }
+  .cite { color: var(--muted); font-size: .98rem; margin: 0 0 1.5rem; max-width: 46rem; }
+  .cite em { color: var(--ink); }
+  p { max-width: 46rem; margin: 0 0 1rem; }
+  ul { max-width: 46rem; padding-left: 1.2rem; margin: 0 0 1rem; }
+  li { margin-bottom: .5rem; }
+
+  .facts {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(13rem, 1fr));
+    gap: 1px;
+    background: var(--line);
+    border: 1px solid var(--line);
+    margin: 1.5rem 0 2rem;
+  }
+  .facts div { background: var(--sand); padding: 1rem 1.1rem; }
+  .facts dt { font-size: .85rem; color: var(--muted); margin: 0 0 .15rem; }
+  .facts dd { margin: 0; font-weight: 600; }
+  .facts { }
+  dl.facts { }
+
+  .figure { margin: 2rem 0; max-width: 46rem; }
+  .figure svg { width: 100%; height: auto; display: block; background: var(--sand); border: 1px solid var(--line); }
+  .figure figcaption { font-size: .92rem; color: var(--muted); margin-top: .6rem; }
+
+  .highlight {
+    background: var(--green-100);
+    padding: 1.25rem 1.5rem;
+    max-width: 46rem;
+    margin: 1.5rem 0;
+  }
+  .highlight strong { color: var(--green-900); }
+  .highlight p:last-child { margin-bottom: 0; }
+
+  .tag { display: inline-block; background: var(--green-100); color: var(--green-900); border-radius: 999px; padding: .1rem .7rem; font-size: .88rem; margin: 0 .35rem .35rem 0; }
+
+  /* Comparison table */
+  .table-scroll { overflow-x: auto; margin: 1.5rem 0; border: 1px solid var(--line); }
+  table { border-collapse: collapse; width: 100%; min-width: 40rem; font-size: .98rem; }
+  th, td { text-align: left; padding: .8rem 1rem; vertical-align: top; border-bottom: 1px solid var(--line); }
+  thead th { background: var(--green-900); color: #fff; font-weight: 600; }
+  tbody th { background: var(--sand); width: 22%; font-weight: 600; }
+  tbody tr:last-child th, tbody tr:last-child td { border-bottom: 0; }
+
+  .note { font-size: .93rem; color: var(--muted); max-width: 46rem; }
+
+  footer { background: var(--sand); border-top: 1px solid var(--line); padding: 2rem 0; font-size: .93rem; color: var(--muted); }
+  footer p { margin-bottom: .4rem; }
+
+  @media (max-width: 520px) {
+    .hero { padding: 3rem 0 2.5rem; }
+    section { padding: 2.5rem 0; }
+  }
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="wrap">
+    <span class="brand">ECOBLOCK</span>
+    <nav aria-label="Page sections">
+      <a href="#paper-1">Paper 1: Concrete blocks</a>
+      <a href="#paper-2">Paper 2: Construction review</a>
+      <a href="#compare">Compared</a>
+      <a href="#ecoblock">Our project</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <div class="hero">
+    <div class="wrap">
+      <h1>What the research says about plastic waste in building materials</h1>
+      <p>ECOBLOCK mixes shredded plastic into an interlocking cement block. This page explains the two published papers we used as reference, in plain language, and shows how each one connects to our work.</p>
+      <p class="team">Team 5 · Department of Civil Engineering, St Joseph Engineering College, Mangaluru · Building Material &amp; Construction (1BCIV304)</p>
+    </div>
+  </div>
+
+  <!-- PAPER 1 -->
+  <section id="paper-1" aria-labelledby="p1-title">
+    <div class="wrap">
+      <h2 id="p1-title">Use of recycled plastic water bottles in concrete blocks</h2>
+      <p class="cite">Sina Safinia and Amani Alkalbani. <em>Procedia Engineering</em> 164 (2016): 214–221.
+        <a href="https://doi.org/10.1016/j.proeng.2016.11.612" target="_blank" rel="noopener">doi:10.1016/j.proeng.2016.11.612</a></p>
+
+      <dl class="facts">
+        <div><dt>Type</dt><dd>Experimental study</dd></div>
+        <div><dt>Where</dt><dd>Oman</dd></div>
+        <div><dt>Presented at</dt><dd>Creative Construction Conference 2016</dd></div>
+        <div><dt>Material studied</dt><dd>Plastic water bottles in hollow concrete blocks</dd></div>
+      </dl>
+
+      <h3>The problem</h3>
+      <p>Concrete blocks are one of the most common building units in Oman. At the same time, bottled water is widely consumed there, so plastic bottles pile up and landfills overflow. The authors ask a simple question: can used water bottles go <em>inside</em> a concrete block and still give a block that is acceptable for building?</p>
+
+      <h3>What they did</h3>
+      <p>Instead of mixing plastic into the concrete, the authors placed whole plastic bottles inside the block. The bottles create empty spaces (voids) at equal distances, and concrete is placed around each bottle. The strength of these blocks was then tested and compared with the hollow concrete blocks sold in the local Omani market. Compressive strength is found by dividing the maximum load a specimen carries by its loaded area.</p>
+
+      <figure class="figure">
+        <svg viewBox="0 0 640 220" role="img" aria-labelledby="fig1-title fig1-desc">
+          <title id="fig1-title">Concrete block with plastic bottles as void formers</title>
+          <desc id="fig1-desc">A rectangular concrete block seen from the side with three plastic bottles lying inside it at equal spacing.</desc>
+          <rect x="40" y="40" width="560" height="140" fill="#b9bcb6" stroke="#6f746d" stroke-width="2"/>
+          <g fill="#5aa7c9" stroke="#2c6f8c" stroke-width="2">
+            <!-- bottle 1 -->
+            <rect x="75" y="80" width="110" height="60" rx="14"/>
+            <rect x="185" y="100" width="25" height="20" rx="3"/>
+            <!-- bottle 2 -->
+            <rect x="265" y="80" width="110" height="60" rx="14"/>
+            <rect x="375" y="100" width="25" height="20" rx="3"/>
+            <!-- bottle 3 -->
+            <rect x="455" y="80" width="110" height="60" rx="14"/>
+          </g>
+          <text x="320" y="30" text-anchor="middle" font-size="15" fill="#1c2420" font-family="system-ui, sans-serif">Concrete block (side view)</text>
+          <text x="130" y="205" text-anchor="middle" font-size="14" fill="#1c2420" font-family="system-ui, sans-serif">Plastic bottle</text>
+          <text x="320" y="205" text-anchor="middle" font-size="14" fill="#1c2420" font-family="system-ui, sans-serif">Equal spacing</text>
+          <text x="510" y="205" text-anchor="middle" font-size="14" fill="#1c2420" font-family="system-ui, sans-serif">Concrete around bottle</text>
+        </svg>
+        <figcaption>Simplified sketch of the idea: bottles form the voids and concrete surrounds them. Not to scale and not copied from the paper.</figcaption>
+      </figure>
+
+      <p>The experiments used three concrete batches, from which a few concrete cylinders were cast for compression testing.</p>
+
+      <h3>What they found</h3>
+      <ul>
+        <li>Blocks made with plastic bottles reached acceptable strength for hollow concrete blocks.</li>
+        <li>Compared with the local Omani hollow concrete blocks, the bottle blocks showed a <strong>57% difference in strength</strong>, in favour of the bottle blocks.</li>
+        <li>The bottles may also add thermal insulation, which matters in Oman&rsquo;s hot desert climate because it can cut the electricity used for cooling.</li>
+      </ul>
+
+      <div class="highlight">
+        <p><strong>In one line:</strong> putting plastic bottles into a concrete block can keep the block strong enough, reduce plastic waste, and help keep the building cooler.</p>
+      </div>
+
+      <h3>How it connects to ECOBLOCK</h3>
+      <p>This paper shows that plastic waste can go into masonry blocks without ruining their strength, which is the same belief behind our project. The difference is the method: the paper uses <em>whole bottles as void formers</em>, while ECOBLOCK mixes <em>shredded plastic</em> into the cement–M-sand mortar.</p>
+    </div>
+  </section>
+
+  <!-- PAPER 2 -->
+  <section id="paper-2" aria-labelledby="p2-title">
+    <div class="wrap">
+      <h2 id="p2-title">Exploration of waste plastic bottles use in construction</h2>
+      <p class="cite">Donald Kwabena Dadzie, Abdul K. Kaliluthin, and D. Raj Kumar. <em>Civil Engineering Journal</em> 6.11 (2020): 2262–2272.
+        <a href="https://doi.org/10.28991/cej-2020-03091616" target="_blank" rel="noopener">doi:10.28991/cej-2020-03091616</a></p>
+
+      <dl class="facts">
+        <div><dt>Type</dt><dd>Review paper</dd></div>
+        <div><dt>Authors based in</dt><dd>Ghana and India</dd></div>
+        <div><dt>Published</dt><dd>November 2020</dd></div>
+        <div><dt>Focus</dt><dd>Waste plastic bottles as a construction material</dd></div>
+      </dl>
+
+      <h3>The problem</h3>
+      <p>Many developing countries, Ghana among them, have a housing shortage, while natural construction materials such as sand and stone are being used up. At the same time, plastic bottle waste keeps growing. The paper looks at whether this waste can help with both problems.</p>
+
+      <h3>What they did</h3>
+      <p>This is not a single experiment. It is a <strong>review</strong>: the authors gather and compare earlier work from different places on how waste plastic bottles have been used in building. One approach they describe is filling bottles with soil, sand or other solid waste and using them like bricks or blocks, bound together with mortar to form masonry walls.</p>
+
+      <h3>What they concluded</h3>
+      <ul>
+        <li><strong>Lower cost.</strong> Waste bottles are cheaper to obtain than most conventional materials, so concrete or brick containing bottles needs smaller quantities of conventional material and costs less.</li>
+        <li><strong>Environmental benefit and energy saving.</strong> Walls built with plastic bottles help keep room temperature steady, which saves energy and works like a simple thermal control system.</li>
+        <li><strong>Less pressure on natural resources.</strong> Reusing bottles reduces how much new material has to be extracted.</li>
+      </ul>
+
+      <div class="highlight">
+        <p><strong>In one line:</strong> waste plastic bottles are a cheap, widely available material that can lower building costs, save energy and ease the demand for natural resources.</p>
+      </div>
+
+      <h3>How it connects to ECOBLOCK</h3>
+      <p>This review supports the &ldquo;why&rdquo; of our project: cost, waste diversion and thermal comfort. Our problem statement lists exactly these concerns for small residential and community buildings, and our comparison table notes lower thermal conductivity as an expected benefit of plastic in the block.</p>
+    </div>
+  </section>
+
+  <!-- COMPARE -->
+  <section id="compare" aria-labelledby="cmp-title">
+    <div class="wrap">
+      <h2 id="cmp-title">The two papers side by side</h2>
+      <div class="table-scroll" role="region" aria-label="Comparison table" tabindex="0">
+        <table>
+          <thead>
+            <tr><th scope="col"></th><th scope="col">Safinia &amp; Alkalbani (2016)</th><th scope="col">Dadzie et al. (2020)</th></tr>
+          </thead>
+          <tbody>
+            <tr><th scope="row">Kind of paper</th><td>Laboratory experiment</td><td>Literature review</td></tr>
+            <tr><th scope="row">Main idea</th><td>Whole bottles create voids inside hollow concrete blocks</td><td>Survey of ways to use waste bottles, including soil- or sand-filled bottles bound with mortar</td></tr>
+            <tr><th scope="row">Main result</th><td>Acceptable strength; 57% difference versus local Omani hollow blocks</td><td>Lower cost, energy saving and environmental benefits</td></tr>
+            <tr><th scope="row">Why it matters</th><td>Shows plastic can sit inside a masonry block safely</td><td>Gives the cost, waste and thermal reasons to pursue it</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- ECOBLOCK -->
+  <section id="ecoblock" aria-labelledby="eco-title">
+    <div class="wrap">
+      <h2 id="eco-title">Where ECOBLOCK fits</h2>
+      <p>Both papers use plastic bottles as large pieces or fillers. ECOBLOCK takes a different route, using <strong>shredded plastic mixed into the mortar</strong> of an interlocking block, so the plastic acts more like small fibres than like voids.</p>
+      <ul>
+        <li>Mix ratio 1 : 2 (cement : M-sand), 5 × 5 × 5 cm cube specimens.</li>
+        <li>Shredded plastic: 13 g per 3-block batch (4.33 g per block).</li>
+        <li>First batch, 7-day compressive strength: <strong>16.36 MPa</strong> at a peak load of 40.9 kN.</li>
+        <li>Failure was ductile, with plastic bridging the cracks instead of the cube shattering suddenly.</li>
+        <li>Next: a higher plastic ratio and partial cement replacement with fly ash.</li>
+      </ul>
+      <p class="note">The papers above come from different test set-ups, so their numbers should not be compared directly with ours. They are used as background that supports the idea, not as a benchmark.</p>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <p><strong>References</strong></p>
+    <p>Safinia, Sina, and Amani Alkalbani. &ldquo;Use of recycled plastic water bottles in concrete blocks.&rdquo; <em>Procedia Engineering</em> 164 (2016): 214–221.</p>
+    <p>Dadzie, Donald Kwabena, Abdul K. Kaliluthin, and D. Raj Kumar. &ldquo;Exploration of waste plastic bottles use in construction.&rdquo; <em>Civil Engineering Journal</em> 6.11 (2020): 2262–2272.</p>
+    <p>These explanations are summaries written from each paper&rsquo;s abstract and introduction. For exact figures and test details, read the full papers through the DOI links.</p>
+  </div>
+</footer>
+
+</body>
+</html>
